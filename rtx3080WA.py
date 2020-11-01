@@ -53,7 +53,7 @@ class Msy:
     def printRTX(self):
         indexlist = self.getRTXindices()
         for x in indexlist:
-            print(f"MSY Model: {self.rtxlist['model'][x]} Price {self.rtxlist['price'][x]} Location: {self.rtxlist['location'][x]} {self.rtxlist['availability'][x]}")
+            print(f"MSY Model: {self.rtxlist['model'][x]:>100s} Price {self.rtxlist['price'][x]:>7s} Location: {self.rtxlist['location'][x]} {self.rtxlist['availability'][x]:>10}")
 
     #returns a list of indices of rtx gpus
     def getRTXindices(self):
@@ -112,7 +112,7 @@ class Ple:
     def printRTX(self):
         indexlist = self.getRTXindices()
         for x in indexlist:
-            print(f"PLE Model: {self.rtxlist['model'][x]} Price {self.rtxlist['price'][x]} Location: {self.rtxlist['location'][x]} {self.rtxlist['availability'][x]}")
+            print(f"PLE Model: {self.rtxlist['model'][x]:>60s} Price {self.rtxlist['price'][x]:>7s} Location: {self.rtxlist['location'][x]} {self.rtxlist['availability'][x]:>10}")
 
     #returns a list of indices of rtx gpus
     def getRTXindices(self):
@@ -130,18 +130,18 @@ Main program
 """
 
 #url to check PLE and MSY
-urlList = ['https://www.ple.com.au/Search/3080','https://www.msy.com.au/search?q=3080']
+urlList = ['https://www.ple.com.au/Search/3070','https://www.ple.com.au/Search/3080','https://www.ple.com.au/Search/3090','https://www.msy.com.au/search?q=3090','https://www.msy.com.au/search?q=3080']
 
-#will call urllist and proper scraping function
+#will call urllist and proper scraping function 
 for links in urlList:
     soup = getSoups(links)
+    model = links[-4:]
+    print(f"\nRTX {model}")
     if re.search('ple',links):
         ple =  Ple(soup)
         ple.getAllInformation()
+        ple.printRTX()
     else:
         msy =  Msy(soup)
         msy.getAllInformation()
-
-#prints rtx information
-ple.printRTX()
-msy.printRTX()
+        msy.printRTX()
