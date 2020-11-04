@@ -1,11 +1,12 @@
 import re
+import os
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
 
 chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument('--headless')
+chrome_options.add_argument('--headless --log-level=3')
 driver = webdriver.Chrome(ChromeDriverManager().install(),options=chrome_options)
 
 #gather bs4 soup from url that will be use for data scraping
@@ -130,18 +131,24 @@ Main program
 """
 
 #url to check PLE and MSY
-urlList = ['https://www.ple.com.au/Search/3070','https://www.ple.com.au/Search/3080','https://www.ple.com.au/Search/3090','https://www.msy.com.au/search?q=3090','https://www.msy.com.au/search?q=3080']
+search = ['RTX 3070','RTX 3080','RTX 3090']
+baseUrl = ['https://www.ple.com.au/Search/','https://www.msy.com.au/search?q=']
 
 #will call urllist and proper scraping function 
-for links in urlList:
-    soup = getSoups(links)
-    model = links[-4:]
-    print(f"\nRTX {model}")
-    if re.search('ple',links):
-        ple =  Ple(soup)
-        ple.getAllInformation()
-        ple.printRTX()
-    else:
-        msy =  Msy(soup)
-        msy.getAllInformation()
-        msy.printRTX()
+for keyword in search:
+    for url in baseUrl:
+        links = url + keyword
+        soup = getSoups(links)
+        if re.search('ple',links):
+            model = links.split('/')
+            print(f"\n{model[-1]}")
+            ple =  Ple(soup)
+            ple.getAllInformation()
+            ple.printRTX()
+        else:
+            model = links[-4:]
+            print(f"\nRTX {model}")
+            msy =  Msy(soup)
+            msy.getAllInformation()
+            msy.printRTX()
+os.system('pause')
