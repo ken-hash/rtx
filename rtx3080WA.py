@@ -54,7 +54,7 @@ class Msy:
     def printRTX(self):
         indexlist = self.getRTXindices()
         for x in indexlist:
-            print(f"MSY Model: {self.rtxlist['model'][x]:>100s} Price {self.rtxlist['price'][x]:>7s} Location: {self.rtxlist['location'][x]} {self.rtxlist['availability'][x]:>10}")
+            print(f"MSY Model: {self.rtxlist['model'][x]:<100s} Price {self.rtxlist['price'][x]:>7s} Location: {self.rtxlist['location'][x]} {self.rtxlist['availability'][x]:>10}")
 
     #returns a list of indices of rtx gpus
     def getRTXindices(self):
@@ -113,7 +113,7 @@ class Ple:
     def printRTX(self):
         indexlist = self.getRTXindices()
         for x in indexlist:
-            print(f"PLE Model: {self.rtxlist['model'][x]:>60s} Price {self.rtxlist['price'][x]:>7s} Location: {self.rtxlist['location'][x]} {self.rtxlist['availability'][x]:>10}")
+            print(f"PLE Model: {self.rtxlist['model'][x]:<60s} Price {self.rtxlist['price'][x]:>7s} Location: {self.rtxlist['location'][x]} {self.rtxlist['availability'][x]:>10}")
 
     #returns a list of indices of rtx gpus
     def getRTXindices(self):
