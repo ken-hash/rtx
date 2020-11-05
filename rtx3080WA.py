@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 
 chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument('--headless --log-level=3')
+chrome_options.add_argument('--headless')
 driver = webdriver.Chrome(ChromeDriverManager().install(),options=chrome_options)
 
 #gather bs4 soup from url that will be use for data scraping
@@ -151,4 +151,5 @@ for keyword in search:
             msy =  Msy(soup)
             msy.getAllInformation()
             msy.printRTX()
+driver.close()
 os.system('pause')
