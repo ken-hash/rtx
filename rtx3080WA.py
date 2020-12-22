@@ -7,12 +7,13 @@ from bs4 import BeautifulSoup
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
+chrome_options.add_argument("--log-level=3")
 driver = webdriver.Chrome(ChromeDriverManager().install(),options=chrome_options)
 
 #gather bs4 soup from url that will be use for data scraping
 #uses web driver + selenium to load scripts to see availabilities instead of just static html
 def getSoups(url):
-    response = driver.get(url)
+    driver.get(url)
     element = driver.find_element_by_xpath('//*')
     html = element.get_attribute('innerHTML')
     soup = BeautifulSoup(html, 'lxml')
@@ -117,7 +118,7 @@ class Ple:
 
     #returns a list of indices of rtx gpus
     def getRTXindices(self):
-        patternName = re.compile('^((?!backplate|PC|Corsair|Vector).)*$',re.IGNORECASE)
+        patternName = re.compile('^((?!backplate|PC|Corsair|Vector|System|Bykski).)*$',re.IGNORECASE)
         ilist = []
         counter = 0
         for x in self.rtxlist['model']:
@@ -131,7 +132,7 @@ Main program
 """
 
 #url to check PLE and MSY
-search = ['RTX 3070','RTX 3080','RTX 3090']
+search = ['RTX 3060','RTX 3070','RTX 3080','RTX 3090']
 baseUrl = ['https://www.ple.com.au/Search/','https://www.msy.com.au/search?q=']
 
 #will call urllist and proper scraping function 
