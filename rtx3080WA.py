@@ -59,7 +59,7 @@ class Msy:
 
     #returns a list of indices of rtx gpus
     def getRTXindices(self):
-        patternName = re.compile('^((?!backplate|Corsair|Vector).)*$',re.IGNORECASE)
+        patternName = re.compile('^((?!backplate|Corsair|Vector|System).)*$',re.IGNORECASE)
         ilist = []
         counter = 0
         for x in self.rtxlist['model']:
